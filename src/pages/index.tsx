@@ -16,7 +16,7 @@ interface HomeProps {
   products: {
     id: string;
     name: string;
-    imgUrl: string;
+    imageUrl: string;
     price: number;
   }[];
 }
@@ -29,6 +29,8 @@ export default function Home({ products }: HomeProps) {
     }
   })
 
+  console.log(products[0].imageUrl)
+
   return (
     <HomeContainer ref={sliderRef} className="keen-slider">
       {
@@ -36,8 +38,8 @@ export default function Home({ products }: HomeProps) {
           return (
             <Product key={product.id} className="keen-slider__slide">
               <Image src={
-                product.imgUrl ? 
-                product.imgUrl : 
+                product.imageUrl ? 
+                product.imageUrl : 
                 "https://files.stripe.com/links/MDB8YWNjdF8xTlRXQW9FUGFuenFpZ09CfGZsX3Rlc3RfTHlua2NoRFBCS1pia1htV1VqeFhhUmpy00ezPtbnQL"
               } alt="" width={520} height={480} />
 
