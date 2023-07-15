@@ -25,8 +25,6 @@ export default function Home({ products }: HomeProps) {
     }
   })
 
-  console.log(products[0].imageUrl)
-
   return (
     <HomeContainer ref={sliderRef} className="keen-slider">
       {
