@@ -1,12 +1,16 @@
+import { GetStaticProps } from "next"
+import Head from 'next/head'
 import Image from "next/image"
-import { HomeContainer, Product } from "../styles/pages/home"
+import Link from "next/link"
+
 
 import { useKeenSlider } from "keen-slider/react"
-import 'keen-slider/keen-slider.min.css'
+
 import { stripe } from "../lib/stripe"
-import { GetStaticProps } from "next"
+import { HomeContainer, Product } from "../styles/pages/home"
+
+import 'keen-slider/keen-slider.min.css'
 import Stripe from "stripe"
-import Link from "next/link"
 
 interface HomeProps {
   products: {
@@ -26,29 +30,34 @@ export default function Home({ products }: HomeProps) {
   })
 
   return (
-    <HomeContainer ref={sliderRef} className="keen-slider">
-      {
-        products.map(product => {
-          return (
-            <Link key={product.id} href={`/product/${product.id}`} prefetch={false}>
-              <Product className="keen-slider__slide">
-                <Image src={
-                  product.imageUrl ? 
-                  product.imageUrl : 
-                  "https://files.stripe.com/links/MDB8YWNjdF8xTlRXQW9FUGFuenFpZ09CfGZsX3Rlc3RfTHlua2NoRFBCS1pia1htV1VqeFhhUmpy00ezPtbnQL"
-                } alt="" width={520} height={480} />
+    <>
+      <Head>
+        <title>Home | Ignite Shop</title>
+      </Head>
 
-                <footer>
-                  <strong>{product.name}</strong>
-                  <span>{product.price}</span>
-                </footer>
-              </Product>
-            </Link>
-          )
-        })
-      }
-      
-    </HomeContainer>
+      <HomeContainer ref={sliderRef} className="keen-slider">
+        {
+          products.map(product => {
+            return (
+              <Link key={product.id} href={`/product/${product.id}`} prefetch={false}>
+                <Product className="keen-slider__slide">
+                  <Image src={
+                    product.imageUrl ? 
+                    product.imageUrl : 
+                    "https://files.stripe.com/links/MDB8YWNjdF8xTlRXQW9FUGFuenFpZ09CfGZsX3Rlc3RfTHlua2NoRFBCS1pia1htV1VqeFhhUmpy00ezPtbnQL"
+                  } alt="" width={520} height={480} />
+
+                  <footer>
+                    <strong>{product.name}</strong>
+                    <span>{product.price}</span>
+                  </footer>
+                </Product>
+              </Link>
+            )
+          })
+        }
+      </HomeContainer>
+    </>
   )
 }
 
